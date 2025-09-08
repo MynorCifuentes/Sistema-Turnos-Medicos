@@ -1,5 +1,13 @@
 name: Generar Diagrama Gantt con Mermaid
 
+permissions:
+  contents: write
+  issues: read
+  pull-requests: write
+  actions: read
+  checks: write
+  workflows: write
+
 on:
   issues:
     types: [opened, closed, edited, deleted]
