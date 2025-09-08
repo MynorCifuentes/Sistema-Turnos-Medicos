@@ -1,11 +1,32 @@
 from tkinter import Tk, Frame, Label, Button
 
+
+
+def registro():
+    # Tamaño de la ventana
+    ancho_ventana = 300
+    alto_ventana = 600
+
+    # Obtener el tamaño de la pantalla
+    ancho_pantalla = ventana.winfo_screenwidth()
+    alto_pantalla = ventana.winfo_screenheight()
+
+    # Calcular coordenadas x e y para centrar la ventana
+    x = (ancho_pantalla // 2) - (ancho_ventana // 2)
+    y = (alto_pantalla // 2) - (alto_ventana // 2)
+
+    # Asignar geometría centrada
+    ventana.geometry(f"{ancho_ventana}x{alto_ventana}+{x}+{y}")
+
+    frame_botones.pack_forget()
+    frame_registro.pack()
+
 ventana = Tk()
 ventana.title("Practica2")
 
 # Tamaño de la ventana
-ancho_ventana = 800
-alto_ventana = 400
+ancho_ventana = 600
+alto_ventana = 200
 
 # Obtener el tamaño de la pantalla
 ancho_pantalla = ventana.winfo_screenwidth()
@@ -34,13 +55,21 @@ frame_botones = Frame(panel_inferior, bg="#2C3E50")
 frame_botones.pack(expand=True)
 
 
-btn_registrar = Button(frame_botones, text="Registrar Paciente")
+btn_registrar = Button(frame_botones, text="Registrar Paciente", font="Arial 12", command=registro)
 btn_registrar.pack(side="left", padx=10)
 
-btn_visualizar = Button(frame_botones, text="Visualizar Pacientes")
+btn_visualizar = Button(frame_botones, text="Visualizar Pacientes", font="Arial 12")
 btn_visualizar.pack(side="left", padx=10)
 
-btn_atender = Button(frame_botones, text="Atender Paciente")
+btn_atender = Button(frame_botones, text="Atender Paciente", font="Arial 12")
 btn_atender.pack(side="left", padx=10)
+
+#------------------------------------------------------------------------------------------------------------------------------------
+#Frame registrar paciente
+
+frame_registro = Frame(panel_inferior, bg="#2C3E50")
+frame_botones.pack(expand=True)
+
+
 
 ventana.mainloop()
