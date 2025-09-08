@@ -33,6 +33,7 @@ panel_inferior.pack(fill="both", expand=True)
 frame_botones = Frame(panel_inferior, bg="#2C3E50")
 frame_botones.pack(expand=True)
 
+
 btn_registrar = Button(frame_botones, text="Registrar Paciente")
 btn_registrar.pack(side="left", padx=10)
 
