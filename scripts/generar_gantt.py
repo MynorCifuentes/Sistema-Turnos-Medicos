@@ -25,6 +25,9 @@ def format_date(date_str):
 
 def main():
     milestones = get_milestones()
+    if not isinstance(milestones, list):
+        print("La API no devolvió una lista de milestones:", milestones)
+        return
     mermaid = [
         "```mermaid",
         "gantt",
@@ -49,6 +52,6 @@ def main():
     os.makedirs("docs", exist_ok=True)
     with open("docs/gantt.md", "w", encoding="utf-8") as f:
         f.write("\n".join(mermaid))
-
+        
 if __name__ == "__main__":
     main()
