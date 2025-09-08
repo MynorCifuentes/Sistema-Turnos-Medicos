@@ -1,5 +1,9 @@
 name: Generar Diagrama Gantt con Mermaid
 
+permissions:
+  contents: write
+  issues: read
+
 on:
   issues:
     types: [opened, closed, edited, deleted]
