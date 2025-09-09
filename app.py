@@ -47,21 +47,24 @@ btn_atender.pack(side="left", padx=10)
 # Frame de registro de paciente (oculto por defecto)
 frame_registro = Frame(panel_inferior, bg="#2C3E50")
 
+lbl_registro = Label(frame_registro, text= "Registro de Pacientes", bg = "#2C3E50", fg="white", font= "Arial 16")
+lbl_registro.grid(column=0, row=0, sticky="e", padx=(40,10), pady=(30,10))
+
 # Etiqueta y campo Nombre
 lbl_nombre = Label(frame_registro, text="Nombre:", bg="#2C3E50", fg="white", font="Arial 14")
-lbl_nombre.grid(column=0, row=0, sticky="e", padx=(40,10), pady=(30,10))
+lbl_nombre.grid(column=0, row=1, sticky="e", padx=(40,10), pady=(30,10))
 entry_nombre = Entry(frame_registro, font="Arial 14", width=25)
-entry_nombre.grid(column=1, row=0, padx=(0,40), pady=(30,10), sticky="w")
+entry_nombre.grid(column=1, row=1, padx=(0,40), pady=(30,10), sticky="w")
 
 # Etiqueta y campo Edad
 lbl_edad = Label(frame_registro, text="Edad:", bg="#2C3E50", fg="white", font="Arial 14")
-lbl_edad.grid(column=0, row=1, sticky="e", padx=(40,10), pady=10)
+lbl_edad.grid(column=0, row=2, sticky="e", padx=(40,10), pady=10)
 entry_edad = Entry(frame_registro, font="Arial 14", width=8)
-entry_edad.grid(column=1, row=1, padx=(0,40), pady=10, sticky="w")
+entry_edad.grid(column=1, row=2, padx=(0,40), pady=10, sticky="w")
 
 # Combobox de especialidad médica
 lbl_especialidad = Label(frame_registro, text="", bg="#2C3E50")
-lbl_especialidad.grid(column=0, row=2)  # Espacio
+lbl_especialidad.grid(column=0, row=3)  # Espacio
 especialidades = ["General", "Pediatría", "Cardiología", "Ginecología", "Traumatología"]
 var_especialidad = StringVar()
 combo_especialidad = Combobox(frame_registro, textvariable=var_especialidad, values=especialidades, font="Arial 14", width=22, state="readonly")
