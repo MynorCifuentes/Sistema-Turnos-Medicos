@@ -4,7 +4,7 @@ gantt
     title Gantt de Sistema-Turnos-Medicos
     excludes    weekends
     section Interfaz Gráfica
-    Botones :active, 2, 2025-09-08, 2025-09-09
+    Botones :done, 2, 2025-09-08, 2025-09-09
     Panel Principal :done, 1, 2025-09-08, 2025-09-09
     section TDA
     Cola :active, 3, 2025-09-08, 2025-09-10
