@@ -1,17 +1,11 @@
 ### Diagrama de Actividad del método `atender()` (Mermaid)
 
 ```mermaid
----
-title: Actividad del método atender()
----
-start
-    :Obtener paciente actual de la cola;
-    decision ¿Hay paciente en la cola?
-        yes
-            :Remover paciente con pop();
-            :Mostrar mensaje "Se atendió a: [nombre]";
-        no
-            :Mostrar mensaje "No hay pacientes en la cola";
-    :Actualizar información de la ventana;
-end
+flowchart TD
+    A[Obtener paciente actual de la cola] --> B{¿Hay paciente en la cola?}
+    B -- Sí --> C[Remover paciente con pop()]
+    C --> D[Mostrar mensaje "Se atendió a: [nombre]"]
+    D --> F[Actualizar información de la ventana]
+    B -- No --> E[Mostrar mensaje "No hay pacientes en la cola"]
+    E --> F
 ```
