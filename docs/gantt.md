@@ -9,5 +9,5 @@ gantt
     section TDA
     Cola :done, 3, 2025-09-08, 2025-09-10
     section Graphviz
-    Graphviz :active, 4, 2025-09-08, 2025-09-11
+    Graphviz :done, 4, 2025-09-08, 2025-09-11
 ```
