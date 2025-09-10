@@ -6,7 +6,7 @@ class ColaPacientes:
         self.ultimo = None
         self.tamanio = 0
 
-    # Agrega al final (como push)
+
     def push(self, nombre, edad, especialidad):
         nuevo = Paciente(nombre, edad, especialidad)
         if self.ultimo:
@@ -16,7 +16,7 @@ class ColaPacientes:
         self.ultimo = nuevo
         self.tamanio += 1
 
-    # Quita del frente (como pop)
+
     def pop(self):
         if self.primero:
             paciente = self.primero
@@ -48,15 +48,16 @@ class ColaPacientes:
             f.write('digraph ColaPacientes {\n')
             f.write('rankdir=LR;\n')
             actual = self.primero
-            count = 0
+            contador = 0
             while actual:
-                node_name = f'Paciente{count}'
+                
+                nombre_nodo = f'Paciente{contador}'
                 label = f"{actual.nombre}\\nEdad: {actual.edad}\\n{actual.especialidad}"
-                f.write(f'{node_name} [label="{label}"];\n')
+                f.write(f'{nombre_nodo} [label="{label}"];\n')
                 if actual.siguiente:
-                    f.write(f'{node_name} -> Paciente{count+1};\n')
+                    f.write(f'{nombre_nodo} -> Paciente{contador+1};\n')
                 actual = actual.siguiente
-                count += 1
+                contador += 1
             f.write('}\n')
         os.system(f'dot -Tpng {dot_filename} -o {img_filename}')
         return img_filename

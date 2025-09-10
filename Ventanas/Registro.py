@@ -18,7 +18,7 @@ class RegistroPaciente(tk.Frame):
         self.entry_edad = tk.Entry(self, font="Arial 14", width=8)
         self.entry_edad.grid(row=2, column=1, padx=(0,40), pady=10, sticky="w")
 
-        especialidades = ["General", "Pediatría", "Cardiología", "Ginecología", "Traumatología"]
+        especialidades = ["Medicina General", "Pediatría", "Ginecología", "Dermatología"]
         self.especialidad_var = tk.StringVar()
         self.especialidad_var.set("Especialidad Medica")
         self.combo_especialidad = tk.OptionMenu(self, self.especialidad_var, *especialidades)
