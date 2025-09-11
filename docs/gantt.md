@@ -11,5 +11,5 @@ gantt
     section Graphviz
     Graphviz :done, 4, 2025-09-08, 2025-09-11
     section Logica programa
-    Contador Tiempo estimado :active, 5, 2025-09-10, 2025-09-12
+    Contador Tiempo estimado :done, 5, 2025-09-10, 2025-09-12
 ```
