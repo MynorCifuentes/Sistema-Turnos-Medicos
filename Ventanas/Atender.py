@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 class AtenderPaciente(tk.Frame):
     def __init__(self, master, cola, regresar_callback):
@@ -14,7 +15,7 @@ class AtenderPaciente(tk.Frame):
         self.lbl_paciente = tk.Label(self, text="", bg="#2C3E50", fg="white", font="Arial 14")
         self.lbl_paciente.grid(row=1, column=1, padx=(10,40), pady=10, sticky="w")
 
-        tk.Label(self, text="Tiempo Aproximado", bg="#2C3E50", fg="white", font="Arial 14").grid(row=2, column=0, padx=(40,10), pady=10, sticky="w")
+        tk.Label(self, text="Tiempos", bg="#2C3E50", fg="white", font="Arial 14").grid(row=2, column=0, padx=(40,10), pady=10, sticky="w")
         self.lbl_tiempo = tk.Label(self, text="", bg="#2C3E50", fg="white", font="Arial 14")
         self.lbl_tiempo.grid(row=2, column=1, padx=(10,40), pady=10, sticky="w")
 
@@ -29,7 +30,7 @@ class AtenderPaciente(tk.Frame):
         paciente = self.cola.primero
         if paciente:
             self.lbl_paciente.config(text=paciente.nombre)
-            self.lbl_tiempo.config(text="10 minutos")
+            self.lbl_tiempo.config(text=f"Espera: {paciente.tiempo_espera} min | Atención: {paciente.tiempo_atencion} min")
         else:
             self.lbl_paciente.config(text="Ningún paciente")
             self.lbl_tiempo.config(text="0 minutos")
@@ -37,7 +38,7 @@ class AtenderPaciente(tk.Frame):
     def atender(self):
         paciente = self.cola.pop()
         if paciente:
-            tk.messagebox.showinfo("Atendido", f"Se atendió a: {paciente.nombre}")
+            messagebox.showinfo("Atendido", f"Se atendió a: {paciente.nombre}")
         else:
-            tk.messagebox.showinfo("Info", "No hay pacientes en la cola")
+            messagebox.showinfo("Info", "No hay pacientes en la cola")
         self.actualizar_info()

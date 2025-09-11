@@ -21,15 +21,36 @@ class RegistroPaciente(tk.Frame):
         especialidades = ["Medicina General", "Pediatría", "Ginecología", "Dermatología"]
         self.especialidad_var = tk.StringVar()
         self.especialidad_var.set("Especialidad Medica")
-        self.combo_especialidad = tk.OptionMenu(self, self.especialidad_var, *especialidades)
+        self.combo_especialidad = tk.OptionMenu(self, self.especialidad_var, *especialidades, command=self.actualizar_tiempo_espera)
         self.combo_especialidad.config(font="Arial 14")
         self.combo_especialidad.grid(row=3, column=0, columnspan=2, pady=10, padx=40, sticky="ew")
 
-        tk.Button(self, text="Agendar", font="Arial 12", command=self.agendar).grid(row=4, column=0, sticky="w", padx=(40,10), pady=(30,10))
-        tk.Button(self, text="Regresar", font="Arial 12", command=self.regresar_callback).grid(row=4, column=1, sticky="e", padx=(10,40), pady=(30,10))
+        tk.Label(self, text="Tiempo de espera estimado:", bg="#2C3E50", fg="white", font="Arial 14").grid(row=4, column=0, sticky="e", padx=(40,10), pady=(10,10))
+        self.lbl_tiempo_espera = tk.Label(self, text="0 minutos", bg="#2C3E50", fg="white", font="Arial 14")
+        self.lbl_tiempo_espera.grid(row=4, column=1, padx=(0,40), pady=(10,10), sticky="w")
+
+        tk.Button(self, text="Agendar", font="Arial 12", command=self.agendar).grid(row=5, column=0, sticky="w", padx=(40,10), pady=(30,10))
+        tk.Button(self, text="Regresar", font="Arial 12", command=self.regresar_callback).grid(row=5, column=1, sticky="e", padx=(10,40), pady=(30,10))
 
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
+        self.actualizar_tiempo_espera()
+
+    def actualizar_tiempo_espera(self, *args):
+        especialidad = self.especialidad_var.get()
+        if especialidad != "Especialidad Medica":
+            # El tiempo de espera es la suma de todos los tiempos de atención en la cola
+            tiempo_espera = 0
+            actual = self.cola.primero
+            while actual:
+                tiempo_espera += actual.tiempo_atencion
+                actual = actual.siguiente
+            tiempo_atencion = self.cola.tiempo_base_especialidad(especialidad)
+            self.lbl_tiempo_espera.config(
+                text=f"Espera: {tiempo_espera} min | Atención: {tiempo_atencion} min"
+            )
+        else:
+            self.lbl_tiempo_espera.config(text="0 minutos")
 
     def agendar(self):
         nombre = self.entry_nombre.get().strip()
@@ -40,6 +61,8 @@ class RegistroPaciente(tk.Frame):
             self.entry_nombre.delete(0, tk.END)
             self.entry_edad.delete(0, tk.END)
             self.especialidad_var.set("Especialidad Medica")
+            self.lbl_tiempo_espera.config(text="0 minutos")
             messagebox.showinfo("Éxito", "Paciente agendado en la cola")
+            self.actualizar_tiempo_espera()
         else:
             messagebox.showerror("Error", "Complete todos los campos correctamente.")

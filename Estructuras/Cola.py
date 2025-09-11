@@ -1,13 +1,44 @@
 import os
 from Estructuras.Paciente import Paciente
+
 class ColaPacientes:
     def __init__(self):
         self.primero = None
         self.ultimo = None
         self.tamanio = 0
+        
+    def _actualizar_tiempos(self):
+        actual = self.primero
+        tiempo_acumulado = 0
+        while actual:
+            actual.tiempo_espera = tiempo_acumulado
+            actual.tiempo_atencion = self.tiempo_base_especialidad(actual.especialidad)
+            tiempo_acumulado += actual.tiempo_atencion
+            actual = actual.siguiente
 
+
+    def tiempo_base_especialidad(self, especialidad):
+        if especialidad == "Medicina General":
+            return 10
+        elif especialidad == "Pediatría":
+            return 15
+        elif especialidad == "Ginecología":
+            return 20
+        elif especialidad == "Dermatología":
+            return 25
+        return 10  # valor por defecto
+
+    def obtener_tiempo_espera_actual(self, especialidad):
+        actual = self.primero
+        tiempo_total = 0
+        while actual:
+            if actual.especialidad == especialidad:
+                tiempo_total += self.tiempo_base_especialidad(especialidad)
+            actual = actual.siguiente
+        return tiempo_total
 
     def push(self, nombre, edad, especialidad):
+        #tiempo_espera = self.obtener_tiempo_espera_actual(especialidad)
         nuevo = Paciente(nombre, edad, especialidad)
         if self.ultimo:
             self.ultimo.siguiente = nuevo
@@ -15,7 +46,7 @@ class ColaPacientes:
             self.primero = nuevo
         self.ultimo = nuevo
         self.tamanio += 1
-
+        self._actualizar_tiempos()
 
     def pop(self):
         if self.primero:
@@ -24,16 +55,10 @@ class ColaPacientes:
             if not self.primero:
                 self.ultimo = None
             self.tamanio -= 1
+            self._actualizar_tiempos()
             return paciente
+        
         return None
-
-    def listar(self):
-        actual = self.primero
-        pacientes = []
-        while actual:
-            pacientes.append(actual)
-            actual = actual.siguiente
-        return pacientes
 
     def esta_vacia(self):
         return self.primero is None
@@ -41,23 +66,29 @@ class ColaPacientes:
     def contar(self):
         return self.tamanio
 
-    def graficar(self, filename='cola_pacientes'):
-        dot_filename = f"{filename}.dot"
-        img_filename = f"{filename}.png"
-        with open(dot_filename, 'w', encoding='utf-8') as f:
-            f.write('digraph ColaPacientes {\n')
-            f.write('rankdir=LR;\n')
+    # Método graficar que recibe de parametro un archivo con nombre cola_pacientes
+    def graficar(self, nombre_archivo='cola_pacientes'):
+        archivo_dot = f"{nombre_archivo}.dot"
+        archivo_img= f"{nombre_archivo}.png"
+        with open(archivo_dot, 'w', encoding='utf-8') as archivo:
+            archivo.write('digraph ColaPacientes {\n') 
+            archivo.write('rankdir=LR;\n')
             actual = self.primero
-            contador = 0
+            contador = 0 
             while actual:
-                
                 nombre_nodo = f'Paciente{contador}'
-                label = f"{actual.nombre}\\nEdad: {actual.edad}\\n{actual.especialidad}"
-                f.write(f'{nombre_nodo} [label="{label}"];\n')
+                lbl_paciente = (
+                    f"{actual.nombre}\\n"
+                    f"Edad: {actual.edad}\\n"
+                    f"{actual.especialidad}\\n"
+                    f"Espera: {actual.tiempo_espera} min\\n"
+                    f"Atención: {actual.tiempo_atencion} min"
+                )
+                archivo.write(f'{nombre_nodo} [label="{lbl_paciente}"];\n')
                 if actual.siguiente:
-                    f.write(f'{nombre_nodo} -> Paciente{contador+1};\n')
+                    archivo.write(f'{nombre_nodo} -> Paciente{contador+1};\n')
                 actual = actual.siguiente
                 contador += 1
-            f.write('}\n')
-        os.system(f'dot -Tpng {dot_filename} -o {img_filename}')
-        return img_filename
+            archivo.write('}\n')
+        os.system(f'dot -Tpng {archivo_dot} -o {archivo_img}')
+        return archivo_img

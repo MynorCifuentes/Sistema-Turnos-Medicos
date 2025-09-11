@@ -1,3 +1,4 @@
 digraph ColaPacientes {
 rankdir=LR;
+Paciente0 [label="Diego Maldonado\nEdad: 23\nPediatría\nEspera: 0 min\nAtención: 15 min"];
 }

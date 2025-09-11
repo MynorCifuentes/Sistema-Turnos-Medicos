@@ -8,7 +8,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Practica2")
-        self.geometry("600x400")
+        self.geometry("800x500")
         self.cola = ColaPacientes()
         self.mostrar_menu()
 
@@ -34,6 +34,7 @@ class App(tk.Tk):
         self.limpiar()
         frame = VisualizarPacientes(self, self.cola, self.mostrar_menu)
         frame.pack(fill="both", expand=True)
+        frame.actualizar_lista()
 
     def mostrar_atender(self):
         self.limpiar()
