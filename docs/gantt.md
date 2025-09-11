@@ -10,4 +10,6 @@ gantt
     Cola :done, 3, 2025-09-08, 2025-09-10
     section Graphviz
     Graphviz :done, 4, 2025-09-08, 2025-09-11
+    section Logica programa
+    Contador Tiempo estimado :active, 5, 2025-09-10, 2025-09-12
 ```
