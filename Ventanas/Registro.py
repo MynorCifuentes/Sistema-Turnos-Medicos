@@ -47,7 +47,7 @@ class RegistroPaciente(tk.Frame):
                 actual = actual.siguiente
             tiempo_atencion = self.cola.tiempo_base_especialidad(especialidad)
             self.lbl_tiempo_espera.config(
-                text=f"Espera: {tiempo_espera} min | Atención: {tiempo_atencion} min"
+                text=f"Espera: {tiempo_espera} minutos | Atención: {tiempo_atencion} minutos"
             )
         else:
             self.lbl_tiempo_espera.config(text="0 minutos")

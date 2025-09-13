@@ -22,7 +22,7 @@ class VisualizarPacientes(tk.Frame):
         self.lbl_imagen = tk.Label(self, bg="#2C3E50")
         self.lbl_imagen.grid(row=3, column=0, columnspan=2, pady=10)
 
-        tk.Button(self, text="Mostrar Cola (Graphviz)", font="Arial 12", command=self.mostrar_graphviz).grid(row=4, column=0, pady=10)
+        tk.Button(self, text="Mostrar Cola con Graphviz", font="Arial 12", command=self.mostrar_graphviz).grid(row=4, column=0, pady=10)
         tk.Button(self, text="Regresar", font="Arial 12", command=self.regresar_callback).grid(row=4, column=1, pady=10)
 
         self.grid_columnconfigure(0, weight=1)
