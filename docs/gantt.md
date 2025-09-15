@@ -7,7 +7,6 @@ gantt
     Botones :done, 2, 2025-09-08, 2025-09-09
     Panel Principal :done, 1, 2025-09-08, 2025-09-09
     section TDA
-    Cola :done, 3, 2025-09-08, 2025-09-10
     section Graphviz
     Graphviz :done, 4, 2025-09-08, 2025-09-11
     section Logica programa
